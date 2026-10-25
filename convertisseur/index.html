@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <title>TIOKOVA Devises</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #0f172a; color: #e2e8f0;
+      min-height: 100vh; padding-bottom: 80px;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+      padding: 44px 16px 20px; text-align: center; position: relative;
+    }
+    header h1 { font-size: 1.4rem; letter-spacing: 1px; color: #fff; }
+    #etat-taux { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+    #langue {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px; padding: 4px 10px; font-size: 0.8rem; cursor: pointer;
+    }
+    main { max-width: 520px; margin: 0 auto; padding: 16px; }
+
+    /* Onglets en bas de l'écran, comme une vraie appli mobile */
+    nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      display: flex; background: #1e293b; border-top: 1px solid #334155;
+    }
+    nav button {
+      flex: 1; background: none; border: none; color: #94a3b8;
+      padding: 10px 4px; font-size: 0.75rem; cursor: pointer;
+    }
+    nav button span { display: block; font-size: 1.3rem; }
+    nav button i { font-style: normal; }
+    nav button.actif { color: #a78bfa; }
+
+    .page { display: none; }
+    .page.visible { display: block; }
+
+    .carte {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 16px; padding: 18px; margin-bottom: 14px;
+    }
+    h2 { font-size: 1.15rem; margin-bottom: 12px; }
+    label { display: block; color: #94a3b8; font-size: 0.85rem; margin: 10px 0 4px; }
+    input, select {
+      width: 100%; padding: 12px; font-size: 1.05rem; border-radius: 10px;
+      border: 1px solid #334155; background: #0f172a; color: #fff;
+    }
+    input:focus, select:focus { outline: none; border-color: #7c3aed; }
+    .ligne { display: flex; gap: 8px; }
+    .ligne > * { flex: 1; }
+
+    .rapides, .puces { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .rapides button, .puces button {
+      background: #334155; color: #fff; border: 1px solid transparent;
+      padding: 8px 12px; border-radius: 999px; cursor: pointer; font-size: 0.9rem;
+    }
+    .puces button.choisie { background: #4c1d95; border-color: #a78bfa; }
+    .btn {
+      background: #7c3aed; color: #fff; border: none; border-radius: 999px; cursor: pointer;
+      padding: 12px; width: 100%; margin-top: 12px; font-weight: 600; font-size: 1rem;
+    }
+    .btn.gris { background: #334155; }
+    .lien { background: none; border: none; color: #a78bfa; cursor: pointer; font-size: 0.9rem; margin-top: 12px; }
+
+    .resultat {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid #334155;
+    }
+    .resultat:last-child { border-bottom: none; }
+    .resultat b { font-size: 1.1rem; color: #fff; text-align: right; }
+    .gros { font-size: 1.5rem !important; color: #a78bfa !important; }
+
+    .depense { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #334155; }
+    .depense button { background: none; border: none; color: #f87171; font-size: 1.1rem; cursor: pointer; margin-left: 8px; }
+    .vide { color: #64748b; text-align: center; padding: 10px; }
+    .petit { font-size: 0.8rem; color: #64748b; }
+    .numero { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    .cache { display: none; }
+    #installer { margin-top: 10px; background: #fff; color: #4c1d95; border: none; border-radius: 999px; padding: 8px 16px; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="langue">🇬🇧 English</button>
+    <h1>💱 TIOKOVA Devises</h1>
+    <p id="etat-taux"></p>
+    <button id="installer" class="cache" data-t="installer"></button>
+  </header>
+
+  <main>
+    <!-- ========== ONGLET 1 : CONVERTISSEUR ÉCLAIR ========== -->
+    <section class="page visible" id="page-eclair">
+      <div class="carte">
+        <h2 data-t="eclairTitre"></h2>
+        <div class="ligne">
+          <div>
+            <label data-t="montant"></label>
+            <input type="number" id="eclair-montant" value="10000" inputmode="decimal">
+          </div>
+          <div>
+            <label data-t="devise"></label>
+            <select id="eclair-devise"></select>
+          </div>
+        </div>
+        <div class="rapides">
+          <button data-montant="1000">1 000</button>
+          <button data-montant="5000">5 000</button>
+          <button data-montant="10000">10 000</button>
+          <button data-montant="50000">50 000</button>
+          <button data-montant="100000">100 000</button>
+        </div>
+      </div>
+      <div class="carte">
+        <div id="eclair-resultats"></div>
+        <button class="lien" id="eclair-reglages" data-t="choisirDevises"></button>
+        <div id="eclair-choix" class="cache">
+          <p class="petit" data-t="aideChoix"></p>
+          <div class="puces" id="eclair-puces"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ONGLET 2 : COMMERÇANT ========== -->
+    <section class="page" id="page-commerce">
+      <div class="carte">
+        <h2 data-t="comTitre"></h2>
+        <div class="ligne">
+          <div>
+            <label data-t="prixAchat"></label>
+            <input type="number" id="com-prix" placeholder="500" inputmode="decimal">
+          </div>
+          <div>
+            <label data-t="deviseAchat"></label>
+            <select id="com-devise"></select>
+          </div>
+        </div>
+        <label data-t="maMonnaie"></label>
+        <select id="com-monnaie"></select>
+        <label data-t="quantite"></label>
+        <input type="number" id="com-quantite" value="1" inputmode="numeric">
+        <div class="ligne">
+          <div>
+            <label><span data-t="transport"></span> (<span class="com-code">XAF</span>)</label>
+            <input type="number" id="com-transport" placeholder="0" inputmode="decimal">
+          </div>
+          <div>
+            <label><span data-t="douane"></span> (<span class="com-code">XAF</span>)</label>
+            <input type="number" id="com-douane" placeholder="0" inputmode="decimal">
+          </div>
+        </div>
+        <label data-t="marge"></label>
+        <input type="number" id="com-marge" value="30" inputmode="decimal">
+      </div>
+      <div class="carte" id="com-resultats"></div>
+    </section>
+
+    <!-- ========== ONGLET 3 : VOYAGE ========== -->
+    <section class="page" id="page-voyage">
+      <div class="carte">
+        <h2 data-t="voyTitre"></h2>
+        <div class="ligne">
+          <div>
+            <label data-t="jePaie"></label>
+            <select id="voy-locale"></select>
+          </div>
+          <div>
+            <label data-t="totalEn"></label>
+            <select id="voy-affichage"></select>
+          </div>
+        </div>
+        <label data-t="depense"></label>
+        <input type="text" id="voy-libelle" data-t-ph="exDepense">
+        <label data-t="montant"></label>
+        <input type="number" id="voy-montant" placeholder="25" inputmode="decimal">
+        <button class="btn" id="voy-ajouter" data-t="ajouter"></button>
+      </div>
+      <div class="carte">
+        <div class="resultat"><span data-t="total"></span><b class="gros" id="voy-total">0</b></div>
+        <div id="voy-liste"></div>
+        <button class="btn gris" id="voy-vider" data-t="toutEffacer"></button>
+      </div>
+    </section>
+
+    <!-- ========== ONGLET 4 : DON ========== -->
+    <section class="page" id="page-don">
+      <div class="carte">
+        <h2 data-t="donTitre"></h2>
+        <p data-t="donTexte"></p>
+      </div>
+      <div class="carte">
+        <label>🟠 Orange Money</label>
+        <p class="numero">657 15 97 93</p>
+        <p class="petit"><span data-t="beneficiaire"></span> : Vanelle Maheva</p>
+        <button class="btn" id="copier" data-t="copier"></button>
+      </div>
+      <p class="petit" style="text-align:center" data-t="merci"></p>
+    </section>
+  </main>
+
+  <nav>
+    <button class="actif" data-page="page-eclair"><span>⚡</span><i data-t="ongEclair"></i></button>
+    <button data-page="page-commerce"><span>🛒</span><i data-t="ongCommerce"></i></button>
+    <button data-page="page-voyage"><span>✈️</span><i data-t="ongVoyage"></i></button>
+    <button data-page="page-don"><span>❤️</span><i data-t="ongDon"></i></button>
+  </nav>
+
+  <script>
+    // ================= 1. LES TEXTES EN DEUX LANGUES =================
+    // Chaque texte a une "clé". Pour changer de langue, on remplace
+    // simplement tous les textes par ceux de l'autre dictionnaire.
+    const TEXTES = {
+      fr: {
+        bouton: "🇬🇧 English", chargement: "Chargement des taux…",
+        installer: "📲 Installer l'application",
+        aJour: "✅ Taux à jour : ", horsLigne: "📴 Hors ligne – taux du ", tauxDu: "Taux du ",
+        ongEclair: "Éclair", ongCommerce: "Commerce", ongVoyage: "Voyage", ongDon: "Don",
+        eclairTitre: "⚡ Convertisseur éclair", montant: "Montant", devise: "Devise",
+        choisirDevises: "⚙️ Choisir mes devises", fermerChoix: "✔️ Terminé",
+        aideChoix: "Touche une devise pour l'afficher ou la masquer :",
+        aucuneDevise: "Aucune devise choisie. Touche « Choisir mes devises ».",
+        comTitre: "🛒 Calculateur commerçant", prixAchat: "Prix d'achat (le lot)", deviseAchat: "Devise d'achat",
+        maMonnaie: "Ma monnaie (frais, revente et résultats)", quantite: "Nombre d'articles dans le lot",
+        transport: "Transport", douane: "Douane", marge: "Marge souhaitée (%)",
+        prixConverti: "Prix d'achat converti", coutTotal: "Coût total du lot", coutUnitaire: "Coût réel par article",
+        prixVente: "Prix de vente conseillé", benefice: "Bénéfice total prévu",
+        voyTitre: "✈️ Carnet de dépenses", jePaie: "Je paie en", totalEn: "Total affiché en",
+        depense: "Dépense", exDepense: "Ex : Taxi, repas…", ajouter: "+ Ajouter la dépense",
+        total: "Total", toutEffacer: "Tout effacer", aucuneDepense: "Aucune dépense pour l'instant",
+        depenseDefaut: "Dépense", montantInvalide: "Entre un montant valide", confirmerEffacer: "Effacer toutes les dépenses ?",
+        donTitre: "❤️ Soutenir TIOKOVA",
+        donTexte: "Cette application est gratuite et le restera. Si elle t'est utile, tu peux soutenir son développement avec le montant de ton choix. Chaque don, même petit, aide à créer de nouvelles applications.",
+        beneficiaire: "Bénéficiaire", copier: "Copier le numéro", copie: "✅ Copié !", merci: "Merci pour ton soutien 🙏"
+      },
+      en: {
+        bouton: "🇫🇷 Français", chargement: "Loading rates…",
+        installer: "📲 Install the app",
+        aJour: "✅ Rates updated: ", horsLigne: "📴 Offline – rates from ", tauxDu: "Rates from ",
+        ongEclair: "Quick", ongCommerce: "Business", ongVoyage: "Travel", ongDon: "Donate",
+        eclairTitre: "⚡ Quick converter", montant: "Amount", devise: "Currency",
+        choisirDevises: "⚙️ Choose my currencies", fermerChoix: "✔️ Done",
+        aideChoix: "Tap a currency to show or hide it:",
+        aucuneDevise: "No currency selected. Tap “Choose my currencies”.",
+        comTitre: "🛒 Business calculator", prixAchat: "Purchase price (whole batch)", deviseAchat: "Purchase currency",
+        maMonnaie: "My currency (costs, resale and results)", quantite: "Number of items in the batch",
+        transport: "Shipping", douane: "Customs", marge: "Desired margin (%)",
+        prixConverti: "Converted purchase price", coutTotal: "Total batch cost", coutUnitaire: "Real cost per item",
+        prixVente: "Suggested selling price", benefice: "Expected total profit",
+        voyTitre: "✈️ Expense tracker", jePaie: "I pay in", totalEn: "Show total in",
+        depense: "Expense", exDepense: "E.g. Taxi, meal…", ajouter: "+ Add expense",
+        total: "Total", toutEffacer: "Clear all", aucuneDepense: "No expenses yet",
+        depenseDefaut: "Expense", montantInvalide: "Enter a valid amount", confirmerEffacer: "Delete all expenses?",
+        donTitre: "❤️ Support TIOKOVA",
+        donTexte: "This app is free and will stay free. If you find it useful, you can support its development with any amount you like. Every donation, even a small one, helps build new apps.",
+        beneficiaire: "Recipient", copier: "Copy number", copie: "✅ Copied!", merci: "Thank you for your support 🙏"
+      }
+    };
+
+    // ================= 2. LES DEVISES =================
+    const DEVISES = {
+      XAF: ["🇨🇲", "Franc CFA (Afrique centrale)", "CFA franc (Central Africa)"],
+      XOF: ["🇸🇳", "Franc CFA (Afrique de l'Ouest)", "CFA franc (West Africa)"],
+      EUR: ["🇪🇺", "Euro", "Euro"],
+      USD: ["🇺🇸", "Dollar US", "US dollar"],
+      GBP: ["🇬🇧", "Livre sterling", "British pound"],
+      CNY: ["🇨🇳", "Yuan chinois", "Chinese yuan"],
+      AED: ["🇦🇪", "Dirham (Dubaï)", "UAE dirham"],
+      NGN: ["🇳🇬", "Naira", "Nigerian naira"],
+      GHS: ["🇬🇭", "Cedi ghanéen", "Ghanaian cedi"],
+      MAD: ["🇲🇦", "Dirham marocain", "Moroccan dirham"],
+      ZAR: ["🇿🇦", "Rand sud-africain", "South African rand"],
+      KES: ["🇰🇪", "Shilling kényan", "Kenyan shilling"],
+      CAD: ["🇨🇦", "Dollar canadien", "Canadian dollar"],
+      CHF: ["🇨🇭", "Franc suisse", "Swiss franc"],
+      SAR: ["🇸🇦", "Riyal saoudien", "Saudi riyal"],
+      TRY: ["🇹🇷", "Livre turque", "Turkish lira"],
+      INR: ["🇮🇳", "Roupie indienne", "Indian rupee"],
+      JPY: ["🇯🇵", "Yen japonais", "Japanese yen"]
+    };
+
+    // Taux de secours (25/10/2026), utilisés seulement si l'appli n'a jamais pu
+    // se connecter. Lecture : 1 FCFA = X unités de la devise.
+    let taux = { XAF: 1, XOF: 1, EUR: 1 / 655.957, USD: 0.001708, GBP: 0.001277, CNY: 0.011413, AED: 0.006272,
+                 NGN: 2.266796, GHS: 0.019916, MAD: 0.016767, ZAR: 0.028315, KES: 0.221904, CAD: 0.002392,
+                 CHF: 0.001408, SAR: 0.006405, TRY: 0.084939, INR: 0.161994, JPY: 0.267865 };
+    let dateTaux = "25/10/2026";
+    let etatTaux = "tauxDu"; // quel message afficher en haut
+
+    // ================= 3. MÉMOIRE DU TÉLÉPHONE =================
+    // localStorage garde les données même quand on ferme l'appli.
+    // try/catch évite un plantage si le navigateur le bloque.
+    function lire(cle, defaut) {
+      try { const v = localStorage.getItem(cle); return v ? JSON.parse(v) : defaut; }
+      catch (e) { return defaut; }
+    }
+    function ecrire(cle, valeur) {
+      try { localStorage.setItem(cle, JSON.stringify(valeur)); } catch (e) {}
+    }
+
+    // Langue : celle choisie avant, sinon celle du téléphone
+    let langue = lire("langue", navigator.language.startsWith("en") ? "en" : "fr");
+    function t(cle) { return TEXTES[langue][cle]; }
+    function nomDevise(code) { return DEVISES[code][0] + " " + DEVISES[code][langue === "fr" ? 1 : 2]; }
+
+    // ================= 4. RÉCUPÉRER LES TAUX SUR INTERNET =================
+    const enMemoire = lire("taux", null);
+    if (enMemoire) { Object.assign(taux, enMemoire.taux); dateTaux = enMemoire.date; }
+
+    async function chargerTaux() {
+      try {
+        const reponse = await fetch("https://open.er-api.com/v6/latest/XAF");
+        const donnees = await reponse.json();
+        if (donnees.result !== "success") throw new Error();
+        for (const code in DEVISES) if (donnees.rates[code]) taux[code] = donnees.rates[code];
+        taux.EUR = 1 / 655.957; // l'euro est fixe : taux officiel exact
+        taux.XOF = 1;           // les deux francs CFA valent exactement la même chose
+        dateTaux = new Date().toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" });
+        ecrire("taux", { taux, date: dateTaux });
+        etatTaux = "aJour";
+      } catch (e) {
+        etatTaux = "horsLigne";
+      }
+      afficherEtat();
+      toutRecalculer();
+    }
+    function afficherEtat() { document.getElementById("etat-taux").textContent = t(etatTaux) + dateTaux; }
+
+    // Convertir d'une devise vers une autre en passant par le FCFA
+    function convertir(montant, de, vers) { return montant / taux[de] * taux[vers]; }
+    function format(n, code) {
+      const dec = ["XAF", "XOF", "NGN", "JPY"].includes(code) ? 0 : 2;
+      return n.toLocaleString(langue === "fr" ? "fr-FR" : "en-US",
+        { minimumFractionDigits: dec, maximumFractionDigits: dec }) + " " + code;
+    }
+    function nombre(id) { return parseFloat(document.getElementById(id).value) || 0; }
+    function valeur(id) { return document.getElementById(id).value; }
+
+    // Remplir (ou re-remplir après changement de langue) une liste déroulante
+    function remplirSelect(id, choix) {
+      const select = document.getElementById(id);
+      select.innerHTML = "";
+      for (const code in DEVISES) {
+        const option = document.createElement("option");
+        option.value = code;
+        option.textContent = code + " – " + nomDevise(code);
+        select.appendChild(option);
+      }
+      select.value = choix;
+    }
+
+    // ================= 5. ONGLET ÉCLAIR =================
+    // Seules les devises choisies par l'utilisateur s'affichent
+    let favorites = lire("favorites", ["XAF", "EUR", "USD", "CNY", "NGN"]);
+
+    function calculerEclair() {
+      const montant = nombre("eclair-montant");
+      const de = valeur("eclair-devise");
+      const liste = favorites.filter(code => code !== de);
+      document.getElementById("eclair-resultats").innerHTML = liste.length
+        ? liste.map(code => `<div class="resultat"><span>${nomDevise(code)}</span><b>${format(convertir(montant, de, code), code)}</b></div>`).join("")
+        : `<p class="vide">${t("aucuneDevise")}</p>`;
+    }
+
+    function afficherPuces() {
+      document.getElementById("eclair-puces").innerHTML = Object.keys(DEVISES).map(code =>
+        `<button data-code="${code}" class="${favorites.includes(code) ? "choisie" : ""}">${DEVISES[code][0]} ${code}</button>`).join("");
+    }
+
+    document.getElementById("eclair-puces").addEventListener("click", e => {
+      const code = e.target.dataset.code;
+      if (!code) return;
+      favorites = favorites.includes(code) ? favorites.filter(c => c !== code) : [...favorites, code];
+      ecrire("favorites", favorites);
+      afficherPuces();
+      calculerEclair();
+    });
+    document.getElementById("eclair-reglages").addEventListener("click", () => {
+      const zone = document.getElementById("eclair-choix");
+      zone.classList.toggle("cache");
+      document.getElementById("eclair-reglages").textContent =
+        zone.classList.contains("cache") ? t("choisirDevises") : t("fermerChoix");
+    });
+    document.getElementById("eclair-montant").addEventListener("input", calculerEclair);
+    document.getElementById("eclair-devise").addEventListener("change", () => {
+      ecrire("eclair-devise", valeur("eclair-devise"));
+      calculerEclair();
+    });
+    document.querySelectorAll(".rapides button").forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        document.getElementById("eclair-montant").value = bouton.dataset.montant;
+        calculerEclair();
+      });
+    });
+
+    // ================= 6. ONGLET COMMERÇANT =================
+    function calculerCommerce() {
+      const m = valeur("com-monnaie"); // tout est calculé dans la monnaie du commerçant
+      document.querySelectorAll(".com-code").forEach(s => s.textContent = m);
+      const prixConverti = convertir(nombre("com-prix"), valeur("com-devise"), m);
+      const quantite = Math.max(1, nombre("com-quantite"));
+      const coutTotal = prixConverti + nombre("com-transport") + nombre("com-douane");
+      const coutUnitaire = coutTotal / quantite;
+      const prixVente = coutUnitaire * (1 + nombre("com-marge") / 100);
+      const benefice = (prixVente - coutUnitaire) * quantite;
+
+      document.getElementById("com-resultats").innerHTML = `
+        <div class="resultat"><span>${t("prixConverti")}</span><b>${format(prixConverti, m)}</b></div>
+        <div class="resultat"><span>${t("coutTotal")}</span><b>${format(coutTotal, m)}</b></div>
+        <div class="resultat"><span>${t("coutUnitaire")}</span><b>${format(coutUnitaire, m)}</b></div>
+        <div class="resultat"><span>${t("prixVente")}</span><b class="gros">${format(prixVente, m)}</b></div>
+        <div class="resultat"><span>${t("benefice")}</span><b>${format(benefice, m)}</b></div>`;
+    }
+    ["com-prix", "com-quantite", "com-transport", "com-douane", "com-marge"].forEach(id =>
+      document.getElementById(id).addEventListener("input", calculerCommerce));
+    ["com-devise", "com-monnaie"].forEach(id =>
+      document.getElementById(id).addEventListener("change", () => {
+        ecrire(id, valeur(id));
+        calculerCommerce();
+      }));
+
+    // ================= 7. ONGLET VOYAGE =================
+    let depenses = lire("depenses", []);
+
+    // Échappe le texte tapé par l'utilisateur (évite qu'un "<" casse l'affichage)
+    function proteger(texte) {
+      const d = document.createElement("div"); d.textContent = texte; return d.innerHTML;
+    }
+
+    function afficherVoyage() {
+      const aff = valeur("voy-affichage");
+      let total = 0;
+      const html = depenses.map((d, i) => {
+        const converti = convertir(d.montant, d.devise, aff);
+        total += converti;
+        return `<div class="depense"><span>${proteger(d.libelle)}<br><span class="petit">${format(d.montant, d.devise)}</span></span>
+                <span>${format(converti, aff)}<button data-suppr="${i}">✕</button></span></div>`;
+      }).join("");
+      document.getElementById("voy-liste").innerHTML = html || `<p class="vide">${t("aucuneDepense")}</p>`;
+      document.getElementById("voy-total").textContent = format(total, aff);
+    }
+
+    document.getElementById("voy-ajouter").addEventListener("click", () => {
+      const montant = nombre("voy-montant");
+      if (montant <= 0) return alert(t("montantInvalide"));
+      const libelle = document.getElementById("voy-libelle").value.trim() || t("depenseDefaut");
+      // On mémorise la devise AU MOMENT de la dépense
+      depenses.unshift({ libelle, montant, devise: valeur("voy-locale") });
+      ecrire("depenses", depenses);
+      document.getElementById("voy-libelle").value = "";
+      document.getElementById("voy-montant").value = "";
+      afficherVoyage();
+    });
+    document.getElementById("voy-liste").addEventListener("click", e => {
+      if (e.target.dataset.suppr !== undefined) {
+        depenses.splice(Number(e.target.dataset.suppr), 1);
+        ecrire("depenses", depenses);
+        afficherVoyage();
+      }
+    });
+    document.getElementById("voy-vider").addEventListener("click", () => {
+      if (confirm(t("confirmerEffacer"))) { depenses = []; ecrire("depenses", depenses); afficherVoyage(); }
+    });
+    ["voy-locale", "voy-affichage"].forEach(id =>
+      document.getElementById(id).addEventListener("change", () => {
+        ecrire(id, valeur(id));
+        afficherVoyage();
+      }));
+
+    // ================= 8. ONGLET DON =================
+    document.getElementById("copier").addEventListener("click", async e => {
+      const bouton = e.target;
+      try { await navigator.clipboard.writeText("657159793"); bouton.textContent = t("copie"); }
+      catch (err) { bouton.textContent = "657159793"; }
+      setTimeout(() => bouton.textContent = t("copier"), 2000);
+    });
+
+    // ================= 9. NAVIGATION ENTRE ONGLETS =================
+    document.querySelectorAll("nav button").forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("visible"));
+        document.querySelectorAll("nav button").forEach(b => b.classList.remove("actif"));
+        document.getElementById(bouton.dataset.page).classList.add("visible");
+        bouton.classList.add("actif");
+      });
+    });
+
+    // ================= 10. CHANGER DE LANGUE =================
+    function appliquerLangue() {
+      document.documentElement.lang = langue;
+      document.querySelectorAll("[data-t]").forEach(el => el.textContent = t(el.dataset.t));
+      document.querySelectorAll("[data-t-ph]").forEach(el => el.placeholder = t(el.dataset.tPh));
+      document.getElementById("langue").textContent = t("bouton");
+      document.getElementById("eclair-choix").classList.add("cache");
+      // Les listes déroulantes sont re-remplies avec les noms traduits
+      remplirSelect("eclair-devise", lire("eclair-devise", "XAF"));
+      remplirSelect("com-devise", lire("com-devise", "CNY"));
+      remplirSelect("com-monnaie", lire("com-monnaie", "XAF"));
+      remplirSelect("voy-locale", lire("voy-locale", "EUR"));
+      remplirSelect("voy-affichage", lire("voy-affichage", "XAF"));
+      afficherEtat();
+      toutRecalculer();
+    }
+    document.getElementById("langue").addEventListener("click", () => {
+      langue = langue === "fr" ? "en" : "fr";
+      ecrire("langue", langue);
+      appliquerLangue();
+    });
+
+    // ================= 11. DÉMARRAGE =================
+    function toutRecalculer() { calculerEclair(); calculerCommerce(); afficherVoyage(); }
+    afficherPuces();
+    appliquerLangue();
+    chargerTaux();
+
+    // ================= 12. BOUTON D'INSTALLATION =================
+    // Le navigateur prévient quand l'appli peut être installée : on garde
+    // cette "invitation" et on affiche notre bouton.
+    let invitation = null;
+    const boutonInstaller = document.getElementById("installer");
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      invitation = e;
+      boutonInstaller.classList.remove("cache");
+    });
+    boutonInstaller.addEventListener("click", async () => {
+      if (!invitation) return;
+      invitation.prompt();
+      await invitation.userChoice;
+      invitation = null;
+      boutonInstaller.classList.add("cache");
+    });
+    window.addEventListener("appinstalled", () => boutonInstaller.classList.add("cache"));
+
+    // Service worker = ce qui permet à l'appli de s'ouvrir SANS internet
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>
