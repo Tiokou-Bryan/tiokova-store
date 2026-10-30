@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>NOVA BREAK — TIOKOVA STORE</title>
+  <meta name="description" content="NOVA BREAK : un casse-briques relaxant et spectaculaire. Briques qui se fissurent, boosters légendaires, 5 modes de jeu. Gratuit, sans pub, hors ligne.">
+  <meta name="theme-color" content="#0a1030">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ========== LE JEU ========== -->
+  <canvas id="jeu"></canvas>
+  <div id="ecran" class="cache"></div>
+  <div id="modale" class="cache"></div>
+
+  <!-- ========== PAGE DE PRÉSENTATION (visible avant l'installation) ========== -->
+  <main id="vitrine" class="cache">
+    <a class="retour" href="../">← TIOKOVA STORE</a>
+
+    <section class="hero">
+      <img class="hero-icone" src="icon-512.png" alt="Icône NOVA BREAK">
+      <h1>NOVA BREAK</h1>
+      <p class="hero-slogan">Casse. Respire. Recommence.</p>
+      <div class="badges">
+        <span>🎮 Jeu</span><span>🆓 Gratuit</span><span>📴 Hors ligne</span><span>🚫 Sans pub</span>
+      </div>
+      <div id="zoneInstall">
+        <button class="btn-installer" data-action="installer">⬇ INSTALLER LE JEU</button>
+        <p id="aideInstall" class="aide-install cache">Ouvre le menu <b>⋮</b> de ton navigateur (en haut à droite), puis touche <b>« Installer l'application »</b> ou <b>« Ajouter à l'écran d'accueil »</b>.</p>
+        <p class="petit">Le jeu s'installe en quelques secondes et fonctionne ensuite sans connexion.</p>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <h2>Le jeu</h2>
+      <p>Une bille de lumière, une raquette, et des murs de briques de cristal qui ne demandent qu'à voler en éclats. Dans <b>NOVA BREAK</b>, chaque coup compte : les briques se fissurent sous tes impacts, pâlissent et laissent filtrer la lumière… jusqu'à la rupture. Plus tu avances, plus elles résistent.</p>
+      <p>Une ambiance douce sous un ciel d'aurores, une musique qui vit au rythme de ta partie, et des boosters qui transforment l'écran en feu d'artifice.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Captures</h2>
+      <div class="captures">
+        <figure><img src="captures/capture1.jpg" alt="Menu de NOVA BREAK" loading="lazy"><figcaption>5 modes de jeu</figcaption></figure>
+        <figure><img src="captures/capture2.jpg" alt="Partie en cours" loading="lazy"><figcaption>Des briques qui se fissurent</figcaption></figure>
+        <figure><img src="captures/capture3.jpg" alt="Booster de Bryan" loading="lazy"><figcaption>Le Booster de Bryan</figcaption></figure>
+        <figure><img src="captures/capture4.jpg" alt="Booster Dinky Boy" loading="lazy"><figcaption>Le Booster Dinky Boy</figcaption></figure>
+        <figure><img src="captures/capture5.jpg" alt="Combat de boss" loading="lazy"><figcaption>Un boss tous les 5 niveaux</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="bloc">
+      <h2>Ce qui t'attend</h2>
+      <div class="atouts">
+        <div><span>💎</span><b>Briques vivantes</b><p>Petite fissure, puis plusieurs, puis une grande… et la brique explose en éclats de verre.</p></div>
+        <div><span>🚀</span><b>7 boosters</b><p>Méga balle, multi-balle, balle de feu, laser, bouclier, raquette XL, temps suspendu.</p></div>
+        <div><span>👑</span><b>2 boosters légendaires</b><p>Dinky Boy et le Booster de Bryan : rarissimes, spectaculaires, surpuissants.</p></div>
+        <div><span>🎮</span><b>5 modes</b><p>Aventure avec boss, Défi du jour, Zen, Rush 60 et Invasion.</p></div>
+        <div><span>🎵</span><b>Musique vivante</b><p>Chaque mode a sa musique, et chaque brique cassée joue une note en harmonie.</p></div>
+        <div><span>🔥</span><b>Série de jours</b><p>Un nouveau défi chaque jour. Reviens et fais grimper ta série.</p></div>
+      </div>
+    </section>
+
+    <section class="bloc" id="soutienVitrine"></section>
+
+    <footer>
+      <p><b>TIOKOVA STORE</b> · Vos envies, notre priorité</p>
+      <p class="petit">© 2026 TIOKOVA · <a href="mailto:jiepnoub@gmail.com">jiepnoub@gmail.com</a></p>
+    </footer>
+  </main>
+
+  <script src="audio.js"></script>
+  <script src="jeu.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

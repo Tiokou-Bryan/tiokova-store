@@ -1,0 +1,23 @@
+{
+  "name": "NOVA BREAK",
+  "short_name": "NOVA BREAK",
+  "description": "Un casse-briques relaxant et spectaculaire : briques qui se fissurent, boosters légendaires, 5 modes de jeu.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#0a1030",
+  "theme_color": "#0a1030",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "screenshots": [
+    { "src": "captures/capture1.jpg", "sizes": "800x1440", "type": "image/jpeg", "form_factor": "narrow", "label": "5 modes de jeu" },
+    { "src": "captures/capture2.jpg", "sizes": "800x1440", "type": "image/jpeg", "form_factor": "narrow", "label": "Des briques qui se fissurent" },
+    { "src": "captures/capture3.jpg", "sizes": "800x1440", "type": "image/jpeg", "form_factor": "narrow", "label": "Le Booster de Bryan" },
+    { "src": "captures/capture4.jpg", "sizes": "800x1440", "type": "image/jpeg", "form_factor": "narrow", "label": "Le Booster Dinky Boy" },
+    { "src": "captures/capture5.jpg", "sizes": "800x1440", "type": "image/jpeg", "form_factor": "narrow", "label": "Un boss tous les 5 niveaux" }
+  ]
+}

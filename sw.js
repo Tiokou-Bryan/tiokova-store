@@ -6,7 +6,7 @@
    chacune a son propre sw.js.
    ⚠️ Change VERSION à chaque mise à jour du store.
    ========================================================= */
-const VERSION = 'tiokova-store-v2';
+const VERSION = 'tiokova-store-v3';
 
 const FICHIERS = [
   './',
@@ -19,7 +19,13 @@ const FICHIERS = [
   './assets/logo-embleme.png',
   './assets/blocks-1.jpg',
   './assets/blocks-2.jpg',
-  './assets/blocks-3.jpg'
+  './assets/blocks-3.jpg',
+  './assets/motsdor-1.jpg',
+  './assets/motsdor-2.jpg',
+  './assets/motsdor-3.jpg',
+  './assets/motsdor-4.jpg',
+  './assets/devises-1.jpg',
+  './assets/devises-2.jpg'
 ];
 
 self.addEventListener('install', function (e) {

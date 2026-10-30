@@ -456,6 +456,89 @@ footer { margin-top: 60px; padding: 36px 20px 40px; text-align: center; border-t
   animation: apparait .25s ease;
 }
 
+/* =========================================================
+   MOTS D'OR À LA UNE + FICHE DÉTAILLÉE (comme le Play Store)
+   ========================================================= */
+
+/* Mots d'Or « À la une » : version noir et or */
+.une-or {
+  background: linear-gradient(135deg, rgba(212, 168, 75, .20), rgba(20, 15, 8, .85));
+  border-color: rgba(243, 213, 138, .35);
+}
+.une-or .une-cat { color: #f3d58a; }
+.une-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Lien « Voir la fiche » sur les cartes */
+.carte-appli { cursor: pointer; }
+.lien-fiche {
+  align-self: flex-start;
+  padding: 0;
+  color: var(--violet-clair);
+  font-weight: 700;
+  font-size: .9rem;
+}
+.lien-fiche:hover { text-decoration: underline; }
+
+/* La fiche */
+body.sans-defilement { overflow: hidden; }
+.fiche {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(2, 6, 23, .82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow-y: auto;
+  padding: 24px 12px;
+  animation: apparait .25s ease;
+}
+.fiche-boite {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, var(--carte-2), var(--fond-2));
+  border: 1px solid var(--bord);
+  border-radius: 24px;
+  padding: 24px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .5);
+}
+.fiche-boite h3 { color: #fff; font-size: 1.1rem; margin-top: 6px; }
+.fiche-boite > p { color: #cbd5e1; font-size: .96rem; line-height: 1.6; }
+.fiche-fermer {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid var(--bord);
+  color: #fff;
+  font-size: 1rem;
+}
+.fiche-tete { display: flex; gap: 16px; align-items: center; padding-right: 44px; }
+.fiche-tete img { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 10px 24px rgba(0, 0, 0, .4); flex-shrink: 0; }
+.fiche-tete h2 { color: #fff; font-size: 1.5rem; line-height: 1.15; margin: 0; }
+.fiche-dev { color: var(--doux); font-size: .82rem; margin-top: 2px; }
+.fiche-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--bord);
+  border-bottom: 1px solid var(--bord);
+  padding: 12px 0;
+  text-align: center;
+}
+.fiche-stats div { display: flex; flex-direction: column; gap: 2px; }
+.fiche-stats div + div { border-left: 1px solid var(--bord); }
+.fiche-stats b { color: #fff; font-size: 1rem; }
+.fiche-stats span { color: var(--doux); font-size: .72rem; }
+.fiche-actions { display: flex; gap: 10px; }
+.fiche-actions .bouton-plein { flex: 1; }
+.fiche .captures img { width: 150px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }

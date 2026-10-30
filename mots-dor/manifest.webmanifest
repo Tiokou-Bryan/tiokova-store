@@ -1,0 +1,19 @@
+{
+  "name": "Mots d'Or",
+  "short_name": "Mots d'Or",
+  "description": "4 citations par jour, une histoire du jour et des mots doux à partager. Par TIOKOVA STORE.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0b09",
+  "theme_color": "#0c0b09",
+  "lang": "fr",
+  "categories": ["lifestyle", "books", "entertainment"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

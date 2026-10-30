@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIOKOVA STORE — Applications et jeux créés au Cameroun</title>
-  <meta name="description" content="Applications et jeux gratuits, sans publicité et utilisables hors connexion, créés au Cameroun. TIOKOVA BLOCKS, TIOKOVA Devises et plus.">
+  <meta name="description" content="Applications et jeux gratuits, sans publicité et utilisables hors connexion, créés au Cameroun. Mots d'Or, NOVA BREAK, TIOKOVA BLOCKS, TIOKOVA Devises et plus.">
   <meta name="theme-color" content="#0f172a">
 
   <!-- Aperçu quand on partage le lien (WhatsApp, Facebook…) -->
@@ -52,7 +52,7 @@
         <button class="bouton bouton-vide" id="btn-partager-store" data-t="hero_share">📤 Partager le store</button>
       </div>
       <ul class="hero-chiffres">
-        <li><b id="nb-applis">2</b><span data-t="stat_apps">applications</span></li>
+        <li><b id="nb-applis">4</b><span data-t="stat_apps">applications</span></li>
         <li><b>100 %</b><span data-t="stat_free">gratuit</span></li>
         <li><b>0</b><span data-t="stat_ads">publicité</span></li>
         <li><b>📶</b><span data-t="stat_offline">hors connexion</span></li>
@@ -62,11 +62,72 @@
 
   <main>
 
-    <!-- ============ À LA UNE ============ -->
+    <!-- ============ À LA UNE : MOTS D'OR ============ -->
     <section class="section" id="une">
+      <div class="une une-or">
+        <div class="une-texte">
+          <span class="etiquette etiquette-nouveau" data-t="new_badge">✨ Nouveau</span>
+          <div class="une-titre">
+            <img src="mots-dor/icons/icon-192.png" alt="" width="72" height="72">
+            <div>
+              <h2>Mots d'Or</h2>
+              <p class="une-cat" data-t="cat_tool_wellbeing">Outil · Bien-être</p>
+            </div>
+          </div>
+          <p data-t="motsdor_long">Chaque jour, 4 citations élégantes à choisir parmi 6 modes : Motivation, Amour, Sagesse, Courage, Sagesse d'Afrique et Humour. Une histoire du jour t'attend aussi, avec son ambiance musicale et sa question finale : « Et toi, tu aurais fait comment ? ».</p>
+          <ul class="points">
+            <li data-t="motsdor_p1">✨ 4 citations par jour, 6 modes, 600 citations</li>
+            <li data-t="motsdor_p2">📖 Une histoire du jour avec musique et lecture vocale</li>
+            <li data-t="motsdor_p3">📲 Des images prêtes pour ton statut WhatsApp</li>
+            <li data-t="motsdor_p4">💌 Des mots doux à envoyer à tes proches</li>
+          </ul>
+          <div class="une-actions">
+            <a class="bouton bouton-plein" href="mots-dor/" data-t="get_app">📲 Télécharger l'appli</a>
+            <button class="bouton bouton-vide" data-fiche="motsdor" data-t="see_more">Voir la fiche ›</button>
+          </div>
+        </div>
+        <div class="captures" aria-label="Captures d'écran">
+          <img src="assets/motsdor-1.jpg" alt="Accueil de Mots d'Or : la citation du jour" loading="lazy" width="360" height="720">
+          <img src="assets/motsdor-2.jpg" alt="L'histoire du jour" loading="lazy" width="360" height="720">
+          <img src="assets/motsdor-3.jpg" alt="Envoyer un mot doux à quelqu'un" loading="lazy" width="360" height="720">
+          <img src="assets/motsdor-4.jpg" alt="Une citation en image pour le statut WhatsApp" loading="lazy" width="360" height="720">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ À LA UNE : NOVA BREAK ============ -->
+    <section class="section">
       <div class="une">
         <div class="une-texte">
           <span class="etiquette etiquette-nouveau" data-t="new_badge">✨ Nouveau</span>
+          <div class="une-titre">
+            <img src="nova-break/icon-192.png" alt="" width="72" height="72">
+            <div>
+              <h2>NOVA BREAK</h2>
+              <p class="une-cat" data-t="cat_game_arcade">Jeu · Arcade</p>
+            </div>
+          </div>
+          <p data-t="nova_long">Une bille de lumière, une raquette et des murs de briques de cristal. Chaque coup les fissure, les fait pâlir… jusqu'à ce qu'elles volent en éclats. Plus tu avances, plus elles résistent. Une ambiance douce, une musique qui vit au rythme de ta partie.</p>
+          <ul class="points">
+            <li data-t="nova_p1">💎 Des briques qui se fissurent coup après coup</li>
+            <li data-t="nova_p2">👑 2 boosters légendaires : Dinky Boy et le Booster de Bryan</li>
+            <li data-t="nova_p3">🎮 5 modes : Aventure avec boss, Défi du jour, Zen, Rush 60, Invasion</li>
+          </ul>
+          <a class="bouton bouton-plein" href="nova-break/" data-t="play_now">📲 Télécharger le jeu</a>
+        </div>
+        <div class="captures" aria-label="Captures d'écran">
+          <img src="nova-break/captures/capture2.jpg" alt="Une partie de NOVA BREAK" loading="lazy" width="360" height="648">
+          <img src="nova-break/captures/capture3.jpg" alt="Le Booster de Bryan" loading="lazy" width="360" height="648">
+          <img src="nova-break/captures/capture4.jpg" alt="Le Booster Dinky Boy" loading="lazy" width="360" height="648">
+          <img src="nova-break/captures/capture5.jpg" alt="Combat de boss" loading="lazy" width="360" height="648">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ À LA UNE : TIOKOVA BLOCKS ============ -->
+    <section class="section">
+      <div class="une">
+        <div class="une-texte">
           <div class="une-titre">
             <img src="blocks/icons/icon-192.png" alt="" width="72" height="72">
             <div>
@@ -112,6 +173,8 @@
 
       <noscript>
         <ul class="grille-applis">
+          <li class="carte-appli"><h3>Mots d'Or</h3><a class="bouton bouton-plein" href="mots-dor/">Télécharger</a></li>
+          <li class="carte-appli"><h3>NOVA BREAK</h3><a class="bouton bouton-plein" href="nova-break/">Télécharger</a></li>
           <li class="carte-appli"><h3>TIOKOVA BLOCKS</h3><a class="bouton bouton-plein" href="blocks/">Télécharger</a></li>
           <li class="carte-appli"><h3>TIOKOVA Devises</h3><a class="bouton bouton-plein" href="convertisseur/index.html">Télécharger</a></li>
         </ul>
@@ -234,6 +297,8 @@
     <section class="section" id="nouveautes">
       <h2 data-t="news_title">Nouveautés</h2>
       <ol class="journal">
+        <li><time data-t="news_when">Octobre 2026</time><span data-t="news_motsdor">Nouvelle appli : <b>Mots d'Or</b> ✨</span></li>
+        <li><time data-t="news_when">Octobre 2026</time><span data-t="news_nova">Nouveau jeu : <b>NOVA BREAK</b> 💎</span></li>
         <li><time data-t="news_when">Octobre 2026</time><span data-t="news1">Nouveau jeu : <b>TIOKOVA BLOCKS</b> 🎮</span></li>
         <li><time data-t="news_when">Octobre 2026</time><span data-t="news2">Nouveau look pour le store ✨</span></li>
         <li><time data-t="news_when">Octobre 2026</time><span data-t="news3">Arrivée de <b>TIOKOVA Devises</b> 💱</span></li>
@@ -255,6 +320,11 @@
     </p>
     <p class="copyright">© <span id="annee">2026</span> TIOKOVA STORE</p>
   </footer>
+
+  <!-- Fiche détaillée d'une appli, comme sur le Play Store (remplie par app.js) -->
+  <div class="fiche hidden" id="fiche" role="dialog" aria-modal="true">
+    <div class="fiche-boite" id="fiche-boite"></div>
+  </div>
 
   <!-- Agrandissement des captures d'écran -->
   <div class="loupe hidden" id="loupe" role="dialog" aria-modal="true">
