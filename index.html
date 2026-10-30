@@ -3,54 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIOKOVA STORE</title>
+  <title>TIOKOVA STORE — Applications et jeux créés au Cameroun</title>
+  <meta name="description" content="Applications et jeux gratuits, sans publicité et utilisables hors connexion, créés au Cameroun. TIOKOVA BLOCKS, TIOKOVA Devises et plus.">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Aperçu quand on partage le lien (WhatsApp, Facebook…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TIOKOVA STORE">
+  <meta property="og:description" content="Applications et jeux gratuits créés au Cameroun 🇨🇲. Sans publicité, hors connexion.">
+  <meta property="og:url" content="https://tiokou-bryan.github.io/tiokova-store/">
+  <meta property="og:image" content="https://tiokou-bryan.github.io/tiokova-store/assets/apercu-partage.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>TIOKOVA STORE</h1>
-    <p>Des applications créées au Cameroun.</p>
+
+  <!-- ============ BARRE DU HAUT ============ -->
+  <nav class="topnav">
+    <a class="marque" href="#haut" aria-label="TIOKOVA STORE">
+      <img class="marque-logo" src="assets/logo-embleme.png" alt="" width="54" height="36">
+      <span class="marque-nom">TIOKOVA <b>STORE</b></span>
+    </a>
+    <div class="topnav-liens">
+      <a href="#applis" data-t="nav_apps">Applis</a>
+      <a href="#installer" data-t="nav_install">Installer</a>
+      <a href="#soutenir" data-t="nav_support">Soutenir</a>
+      <a href="#contact" data-t="nav_contact">Contact</a>
+    </div>
+    <button class="btn-langue" id="btn-langue" aria-label="Changer de langue">EN</button>
+  </nav>
+
+  <!-- ============ EN-TÊTE ============ -->
+  <header class="hero" id="haut">
+    <div class="hero-fond" aria-hidden="true"></div>
+    <div class="hero-contenu">
+      <h1 class="invisible">TIOKOVA STORE</h1>
+      <img class="hero-logo" src="assets/logo-tiokova.jpg" alt="TIOKOVA STORE — Vos envies, notre priorité" width="640" height="602">
+      <p class="hero-sur" data-t="hero_kicker">🇨🇲 Créé au Cameroun</p>
+      <p class="hero-texte" data-t="hero_text">Des applications et des jeux gratuits, sans publicité, qui marchent même sans connexion.</p>
+      <div class="hero-actions">
+        <a class="bouton bouton-plein" href="#applis" data-t="hero_cta">Voir les applications</a>
+        <button class="bouton bouton-vide" id="btn-partager-store" data-t="hero_share">📤 Partager le store</button>
+      </div>
+      <ul class="hero-chiffres">
+        <li><b id="nb-applis">2</b><span data-t="stat_apps">applications</span></li>
+        <li><b>100 %</b><span data-t="stat_free">gratuit</span></li>
+        <li><b>0</b><span data-t="stat_ads">publicité</span></li>
+        <li><b>📶</b><span data-t="stat_offline">hors connexion</span></li>
+      </ul>
+    </div>
   </header>
 
   <main>
-    <h2>Mes applications</h2>
-    <ul>
-      <li>
-        <div class="app-entete">
-          <img src="convertisseur/icon-192.png" alt="Icône TIOKOVA Devises">
-          <div>
-            <h3>TIOKOVA Devises</h3>
-            <span class="badge">Gratuit</span>
-            <span class="badge">FR / EN</span>
-            <span class="badge">Hors connexion</span>
-          </div>
-        </div>
-        <p>Convertisseur 18 devises, calculateur de prix pour commerçants et carnet de dépenses de voyage.</p>
-        <a href="convertisseur/index.html">📲 Ouvrir et installer</a>
-      </li>
-    </ul>
 
-    <section class="aide">
-      <h2>Comment installer une application ?</h2>
-      <div class="etapes">
-        <div>
-          <h3>🤖 Android</h3>
-          <p>Ouvre l'application, puis touche <b>« 📲 Installer l'application »</b> en haut de l'écran. Sinon : menu <b>⋮</b> de Chrome → <b>Ajouter à l'écran d'accueil</b>.</p>
+    <!-- ============ À LA UNE ============ -->
+    <section class="section" id="une">
+      <div class="une">
+        <div class="une-texte">
+          <span class="etiquette etiquette-nouveau" data-t="new_badge">✨ Nouveau</span>
+          <div class="une-titre">
+            <img src="blocks/icons/icon-192.png" alt="" width="72" height="72">
+            <div>
+              <h2>TIOKOVA BLOCKS</h2>
+              <p class="une-cat" data-t="cat_game_puzzle">Jeu · Réflexion</p>
+            </div>
+          </div>
+          <p data-t="blocks_long">Place les pièces, complète les lignes et fais exploser le plateau. Chaque jour, un nouveau défi de 3 minutes, des missions et une série à garder. Une partie dure 2 à 5 minutes.</p>
+          <ul class="points">
+            <li data-t="blocks_p1">📅 Défi du jour : les mêmes pièces pour tout le monde</li>
+            <li data-t="blocks_p2">🔥 Série de jours et cadeaux quotidiens</li>
+            <li data-t="blocks_p3">🎨 8 thèmes, 36 succès, bonus à gagner</li>
+          </ul>
+          <a class="bouton bouton-plein" href="blocks/" data-t="play_now">📲 Télécharger le jeu</a>
         </div>
-        <div>
-          <h3>🍎 iPhone</h3>
-          <p>Ouvre l'application dans <b>Safari</b>, touche le bouton <b>Partager</b> (carré avec une flèche) → <b>Sur l'écran d'accueil</b> → <b>Ajouter</b>.</p>
-        </div>
-        <div>
-          <h3>💻 Ordinateur</h3>
-          <p>Ouvre l'application dans Chrome ou Edge, puis clique sur <b>« 📲 Installer l'application »</b>, ou sur l'icône d'installation dans la barre d'adresse.</p>
+        <div class="captures" aria-label="Captures d'écran">
+          <img src="assets/blocks-1.jpg" alt="Accueil de TIOKOVA BLOCKS" loading="lazy" width="360" height="720">
+          <img src="assets/blocks-2.jpg" alt="Une partie de TIOKOVA BLOCKS" loading="lazy" width="360" height="720">
+          <img src="assets/blocks-3.jpg" alt="Missions et série de jours" loading="lazy" width="360" height="720">
         </div>
       </div>
     </section>
+
+    <!-- ============ CATALOGUE ============ -->
+    <section class="section" id="applis">
+      <div class="section-tete">
+        <h2 data-t="apps_title">Toutes les applications</h2>
+        <div class="recherche">
+          <span aria-hidden="true">🔍</span>
+          <input type="search" id="recherche" placeholder="Rechercher…" data-t-placeholder="search" autocomplete="off">
+        </div>
+      </div>
+      <div class="filtres" id="filtres">
+        <button class="filtre actif" data-cat="tout" data-t="f_all">Tout</button>
+        <button class="filtre" data-cat="jeux" data-t="f_games">🎮 Jeux</button>
+        <button class="filtre" data-cat="outils" data-t="f_tools">🧰 Outils</button>
+      </div>
+
+      <ul class="grille-applis" id="liste-applis">
+        <!-- Les cartes sont créées par app.js à partir de la liste APPS -->
+      </ul>
+      <p class="vide hidden" id="aucun-resultat" data-t="no_result">Aucune application ne correspond à ta recherche.</p>
+
+      <noscript>
+        <ul class="grille-applis">
+          <li class="carte-appli"><h3>TIOKOVA BLOCKS</h3><a class="bouton bouton-plein" href="blocks/">Télécharger</a></li>
+          <li class="carte-appli"><h3>TIOKOVA Devises</h3><a class="bouton bouton-plein" href="convertisseur/index.html">Télécharger</a></li>
+        </ul>
+      </noscript>
+
+    </section>
+
+    <!-- ============ POURQUOI TIOKOVA ============ -->
+    <section class="section">
+      <h2 data-t="why_title">Pourquoi TIOKOVA ?</h2>
+      <div class="valeurs">
+        <div class="valeur">
+          <span class="valeur-ico">💸</span>
+          <h3 data-t="v1_t">Gratuit, sans pub</h3>
+          <p data-t="v1_x">Aucune publicité, aucun abonnement, aucun achat caché.</p>
+        </div>
+        <div class="valeur">
+          <span class="valeur-ico">📶</span>
+          <h3 data-t="v2_t">Marche sans internet</h3>
+          <p data-t="v2_x">Une fois installées, les applis s'ouvrent même sans connexion. Idéal quand le réseau ne suit pas.</p>
+        </div>
+        <div class="valeur">
+          <span class="valeur-ico">🔒</span>
+          <h3 data-t="v3_t">Tes données restent chez toi</h3>
+          <p data-t="v3_x">Pas de compte à créer. Ta progression est gardée sur ton téléphone, et nulle part ailleurs.</p>
+        </div>
+        <div class="valeur">
+          <span class="valeur-ico">🔄</span>
+          <h3 data-t="v4_t">Toujours à jour</h3>
+          <p data-t="v4_x">Les nouveautés arrivent toutes seules, sans rien réinstaller.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSTALLER ============ -->
+    <section class="section" id="installer">
+      <h2 data-t="install_title">Comment installer une application ?</h2>
+      <div class="onglets" role="tablist">
+        <button class="onglet actif" data-onglet="android">🤖 Android</button>
+        <button class="onglet" data-onglet="iphone">🍎 iPhone</button>
+        <button class="onglet" data-onglet="pc" data-t="tab_pc">💻 Ordinateur</button>
+      </div>
+      <div class="panneau actif" id="p-android">
+        <ol>
+          <li data-t="and1">Sur cette page, touche <b>📲 Télécharger</b> sous l'application (avec <b>Chrome</b>).</li>
+          <li data-t="and2">Touche <b>« Installer »</b> sur l'écran qui s'ouvre.</li>
+          <li data-t="and3">Sinon : touche le menu <b>⋮</b> en haut à droite, puis <b>Ajouter à l'écran d'accueil</b> → <b>Installer</b>.</li>
+          <li data-t="and4">L'icône apparaît sur ton écran d'accueil, comme une vraie application.</li>
+        </ol>
+      </div>
+      <div class="panneau" id="p-iphone">
+        <ol>
+          <li data-t="ios1">Ouvre l'application dans <b>Safari</b>.</li>
+          <li data-t="ios2">Touche le bouton <b>Partager</b> (carré avec une flèche vers le haut).</li>
+          <li data-t="ios3">Choisis <b>Sur l'écran d'accueil</b>, puis <b>Ajouter</b>.</li>
+        </ol>
+      </div>
+      <div class="panneau" id="p-pc">
+        <ol>
+          <li data-t="pc1">Ouvre l'application dans <b>Chrome</b> ou <b>Edge</b>.</li>
+          <li data-t="pc2">Clique sur l'icône d'installation à droite de la barre d'adresse (un écran avec une flèche).</li>
+          <li data-t="pc3">Clique sur <b>Installer</b>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ SOUTENIR ============ -->
+    <section class="section" id="soutenir">
+      <div class="soutien">
+        <div class="soutien-texte">
+          <h2 data-t="support_title">💛 Soutenir TIOKOVA</h2>
+          <p data-t="support_txt">Toutes les applis sont gratuites. Si elles te rendent service, un petit don Orange Money aide à en créer de nouvelles.</p>
+          <p class="petit" data-t="support_free">Tu peux aussi nous aider en partageant le store autour de toi 🙏</p>
+        </div>
+        <div class="om">
+          <div class="om-tete"><span class="om-logo">OM</span> Orange Money</div>
+          <div class="om-numero">657 15 97 93</div>
+          <div class="om-nom"><span data-t="beneficiary">Bénéficiaire</span> : <b>Vanelle Maheva</b></div>
+          <button class="bouton bouton-orange" id="btn-copier" data-t="copy">📋 Copier le numéro</button>
+          <a class="bouton bouton-vide" href="tel:%23150%23" data-t="dial">📞 Ouvrir #150#</a>
+          <p class="avertissement" data-t="pin_warning">Ne donne jamais ton code secret. TIOKOVA ne te le demandera jamais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="contact">
+        <div>
+          <h2 data-t="contact_title">📩 Nous contacter</h2>
+          <p data-t="contact_txt">Une idée d'application, un bug, une question ? Écris-nous : chaque message est lu.</p>
+          <p class="contact-mail">jiepnoub@gmail.com</p>
+        </div>
+        <a class="bouton bouton-plein" href="mailto:jiepnoub@gmail.com?subject=TIOKOVA%20STORE" data-t="contact_btn">✉️ Écrire un e-mail</a>
+      </div>
+    </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section class="section" id="faq">
+      <h2 data-t="faq_title">Questions fréquentes</h2>
+      <details>
+        <summary data-t="q1">C'est vraiment gratuit ?</summary>
+        <p data-t="a1">Oui. Aucune application ne demande de paiement, et il n'y a pas de publicité. Les dons sont totalement facultatifs.</p>
+      </details>
+      <details>
+        <summary data-t="q2">Pourquoi ce n'est pas sur le Play Store ?</summary>
+        <p data-t="a2">Ce sont des « applications web installables ». Elles s'installent directement depuis ce site, sans passer par le Play Store, et prennent très peu de place.</p>
+      </details>
+      <details>
+        <summary data-t="q3">Est-ce que c'est sûr ?</summary>
+        <p data-t="a3">Oui. Les applis ne demandent aucune autorisation spéciale (contacts, photos, position…) et ne collectent pas tes données.</p>
+      </details>
+      <details>
+        <summary data-t="q5">Comment avoir la dernière version ?</summary>
+        <p data-t="a5">Rien à faire : l'application se met à jour toute seule quand tu l'ouvres avec internet.</p>
+      </details>
+    </section>
+
+    <!-- ============ NOUVEAUTÉS ============ -->
+    <section class="section" id="nouveautes">
+      <h2 data-t="news_title">Nouveautés</h2>
+      <ol class="journal">
+        <li><time data-t="news_when">Octobre 2026</time><span data-t="news1">Nouveau jeu : <b>TIOKOVA BLOCKS</b> 🎮</span></li>
+        <li><time data-t="news_when">Octobre 2026</time><span data-t="news2">Nouveau look pour le store ✨</span></li>
+        <li><time data-t="news_when">Octobre 2026</time><span data-t="news3">Arrivée de <b>TIOKOVA Devises</b> 💱</span></li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
-    <p>© 2026 TIOKOVA STORE</p>
+    <img class="pied-logo" src="assets/logo-embleme.png" alt="" width="72" height="48">
+    <div class="pied-marque">TIOKOVA <b>STORE</b></div>
+    <p class="devise" data-t="footer_txt">Vos envies, notre priorité.</p>
+    <p class="pied-liens">
+      <a href="#applis" data-t="nav_apps">Applis</a> ·
+      <a href="#installer" data-t="nav_install">Installer</a> ·
+      <a href="#soutenir" data-t="nav_support">Soutenir</a> ·
+      <a href="#contact" data-t="nav_contact">Contact</a> ·
+      <a href="#faq" data-t="nav_faq">FAQ</a>
+    </p>
+    <p class="copyright">© <span id="annee">2026</span> TIOKOVA STORE</p>
   </footer>
+
+  <!-- Agrandissement des captures d'écran -->
+  <div class="loupe hidden" id="loupe" role="dialog" aria-modal="true">
+    <img id="loupe-img" alt="">
+  </div>
+
+  <div class="notif hidden" id="notif"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1024">
+  <meta name="description" content="TIOKOVA BLOCKS : un jeu de blocs rapide et addictif. Défi du jour, série de jours, missions et records.">
+  <title>TIOKOVA BLOCKS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ ÉCRAN D'ACCUEIL ============ -->
+    <section id="screen-home" class="screen active">
+      <header class="topbar">
+        <div class="chip chip-level" id="home-level">
+          <span class="chip-icon">⭐</span>
+          <span><span data-i18n="level_short">Niv.</span> <b id="home-level-num">1</b></span>
+          <div class="xpbar"><div class="xpbar-fill" id="home-xp-fill"></div></div>
+        </div>
+        <div class="chip chip-streak" id="home-streak" role="button" tabindex="0">
+          <span class="chip-icon">🔥</span><b id="home-streak-num">0</b>
+        </div>
+        <div class="chip chip-coins" id="home-coins" role="button" tabindex="0">
+          <span class="chip-icon">🪙</span><b id="home-coins-num">0</b>
+        </div>
+      </header>
+
+      <div class="logo-wrap">
+        <div class="logo-blocks" aria-hidden="true">
+          <span class="lb lb1"></span><span class="lb lb2"></span><span class="lb lb3"></span>
+          <span class="lb lb4"></span><span class="lb lb5"></span>
+        </div>
+        <h1 class="logo">TIOKOVA<br><span>BLOCKS</span></h1>
+        <p class="tagline" data-i18n="tagline">Place. Aligne. Explose.</p>
+      </div>
+
+      <div class="home-best">
+        <span data-i18n="best_score">Meilleur score</span>
+        <b id="home-best">0</b>
+      </div>
+
+      <div class="home-actions">
+        <button class="btn btn-primary btn-big" id="btn-play">
+          <span class="btn-ico">▶</span>
+          <span id="btn-play-label" data-i18n="play">Jouer</span>
+        </button>
+        <button class="btn btn-daily btn-big" id="btn-daily">
+          <span class="btn-ico">📅</span>
+          <span class="btn-col">
+            <span data-i18n="daily_challenge">Défi du jour</span>
+            <small id="daily-sub">—</small>
+          </span>
+          <span class="daily-stars" id="daily-stars"></span>
+        </button>
+      </div>
+
+      <nav class="home-grid">
+        <button class="tile" data-go="missions">
+          <span class="tile-ico">🎯</span><span data-i18n="missions">Missions</span>
+          <span class="badge hidden" id="badge-missions">!</span>
+        </button>
+        <button class="tile" data-go="shop">
+          <span class="tile-ico">🛍️</span><span data-i18n="shop">Boutique</span>
+        </button>
+        <button class="tile" data-go="records">
+          <span class="tile-ico">🏆</span><span data-i18n="records">Records</span>
+        </button>
+        <button class="tile" data-go="achievements">
+          <span class="tile-ico">🎖️</span><span data-i18n="achievements">Succès</span>
+          <span class="badge hidden" id="badge-ach">!</span>
+        </button>
+        <button class="tile" data-go="settings">
+          <span class="tile-ico">⚙️</span><span data-i18n="settings">Réglages</span>
+        </button>
+        <button class="tile tile-donate" data-go="donate">
+          <span class="tile-ico">💛</span><span data-i18n="donate">Nous faire un don</span>
+        </button>
+      </nav>
+
+      <footer class="home-footer">
+        <span>TIOKOVA STORE</span> · <span id="app-version">v1.0</span>
+      </footer>
+    </section>
+
+    <!-- ============ ÉCRAN DE JEU ============ -->
+    <section id="screen-game" class="screen">
+      <header class="game-top">
+        <button class="icon-btn" id="btn-pause" aria-label="Pause">❚❚</button>
+        <div class="game-scores">
+          <div class="score-now" id="score-now">0</div>
+          <div class="score-best"><span>👑</span> <span id="score-best">0</span></div>
+        </div>
+        <div class="game-right">
+          <div class="timer hidden" id="game-timer">3:00</div>
+          <div class="target hidden" id="game-target"></div>
+        </div>
+      </header>
+
+      <div class="combo-banner" id="combo-banner"></div>
+
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="game-canvas"></canvas>
+      </div>
+
+      <footer class="powerbar">
+        <button class="power" data-power="hammer">
+          <span class="power-ico">🔨</span>
+          <span class="power-count" id="pc-hammer">0</span>
+          <span class="power-name" data-i18n="p_hammer">Marteau</span>
+        </button>
+        <button class="power" data-power="bomb">
+          <span class="power-ico">💣</span>
+          <span class="power-count" id="pc-bomb">0</span>
+          <span class="power-name" data-i18n="p_bomb">Bombe</span>
+        </button>
+        <button class="power" data-power="shuffle">
+          <span class="power-ico">🔄</span>
+          <span class="power-count" id="pc-shuffle">0</span>
+          <span class="power-name" data-i18n="p_shuffle">Mélange</span>
+        </button>
+      </footer>
+      <div class="power-hint hidden" id="power-hint"></div>
+    </section>
+
+    <!-- ============ MISSIONS ============ -->
+    <section id="screen-missions" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="missions">Missions</h2>
+        <div class="chip chip-coins small"><span class="chip-icon">🪙</span><b class="coins-mirror">0</b></div>
+      </header>
+      <div class="sub-body">
+        <div class="card streak-card" id="streak-card"></div>
+        <h3 class="section-title"><span data-i18n="daily_missions">Missions du jour</span> <small id="missions-reset"></small></h3>
+        <div id="missions-list" class="list"></div>
+        <div class="card bonus-card" id="missions-bonus"></div>
+      </div>
+    </section>
+
+    <!-- ============ BOUTIQUE ============ -->
+    <section id="screen-shop" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="shop">Boutique</h2>
+        <div class="chip chip-coins small"><span class="chip-icon">🪙</span><b class="coins-mirror">0</b></div>
+      </header>
+      <div class="sub-body">
+        <div class="tabs" id="shop-tabs">
+          <button class="tab active" data-tab="themes" data-i18n="themes">Thèmes</button>
+          <button class="tab" data-tab="powers" data-i18n="powerups">Bonus</button>
+          <button class="tab" data-tab="free" data-i18n="free_coins">Gratuit</button>
+        </div>
+        <div id="shop-content"></div>
+      </div>
+    </section>
+
+    <!-- ============ RECORDS ============ -->
+    <section id="screen-records" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="records">Records</h2>
+        <span></span>
+      </header>
+      <div class="sub-body">
+        <div class="tabs" id="records-tabs">
+          <button class="tab active" data-tab="classic" data-i18n="classic">Classique</button>
+          <button class="tab" data-tab="daily" data-i18n="daily_short">Défis</button>
+          <button class="tab" data-tab="stats" data-i18n="stats">Stats</button>
+        </div>
+        <div id="records-content"></div>
+      </div>
+    </section>
+
+    <!-- ============ SUCCÈS ============ -->
+    <section id="screen-achievements" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="achievements">Succès</h2>
+        <span class="ach-count" id="ach-count">0/0</span>
+      </header>
+      <div class="sub-body">
+        <div id="ach-list" class="list"></div>
+      </div>
+    </section>
+
+    <!-- ============ RÉGLAGES ============ -->
+    <section id="screen-settings" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="settings">Réglages</h2>
+        <span></span>
+      </header>
+      <div class="sub-body">
+        <div class="card setting-list">
+          <label class="setting">
+            <span data-i18n="pseudo">Pseudo</span>
+            <input type="text" id="set-name" maxlength="16" autocomplete="off">
+          </label>
+          <label class="setting">
+            <span data-i18n="sound">Son</span>
+            <input type="checkbox" class="switch" id="set-sound">
+          </label>
+          <label class="setting">
+            <span data-i18n="music">Musique d'ambiance</span>
+            <input type="checkbox" class="switch" id="set-music">
+          </label>
+          <label class="setting">
+            <span data-i18n="vibration">Vibrations</span>
+            <input type="checkbox" class="switch" id="set-vibe">
+          </label>
+          <label class="setting">
+            <span data-i18n="language">Langue</span>
+            <select id="set-lang">
+              <option value="fr">Français</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </div>
+        <div class="card">
+          <button class="btn btn-ghost full" id="btn-tuto" data-i18n="replay_tuto">Revoir le tutoriel</button>
+          <button class="btn btn-ghost full" id="btn-install" data-i18n="install_app">Installer l'application</button>
+          <a class="btn btn-ghost full" href="mailto:jiepnoub@gmail.com?subject=TIOKOVA%20BLOCKS"><span>✉️</span> <span data-i18n="contact_us">Nous contacter</span></a>
+          <button class="btn btn-danger full" id="btn-reset" data-i18n="reset_all">Tout réinitialiser</button>
+        </div>
+        <p class="about" data-i18n="about">TIOKOVA BLOCKS est un jeu TIOKOVA STORE. Ta progression est sauvegardée sur ce téléphone.</p>
+      </div>
+    </section>
+
+    <!-- ============ DON ============ -->
+    <section id="screen-donate" class="screen">
+      <header class="sub-top">
+        <button class="icon-btn back" data-back>←</button>
+        <h2 data-i18n="donate">Nous faire un don</h2>
+        <span></span>
+      </header>
+      <div class="sub-body">
+        <div class="card donate-hero">
+          <div class="donate-heart">💛</div>
+          <p data-i18n="donate_intro">TIOKOVA BLOCKS est gratuit et sans publicité. Si le jeu te plaît, tu peux soutenir son créateur avec un petit don Orange Money. Chaque franc aide à créer de nouveaux jeux.</p>
+        </div>
+
+        <div class="card om-card">
+          <div class="om-head">
+            <span class="om-logo">OM</span>
+            <span data-i18n="om_title">Orange Money</span>
+          </div>
+          <div class="om-number" id="om-number">657 15 97 93</div>
+          <div class="om-name"><span data-i18n="beneficiary">Bénéficiaire</span> : <b>Vanelle Maheva</b></div>
+          <button class="btn btn-orange full" id="btn-copy-number">
+            <span>📋</span> <span data-i18n="copy_number">Copier le numéro</span>
+          </button>
+          <a class="btn btn-ghost full" id="btn-dial" href="tel:%23150%23">
+            <span>📞</span> <span data-i18n="open_om">Ouvrir le menu Orange Money (#150#)</span>
+          </a>
+        </div>
+
+        <div class="card">
+          <h3 class="section-title" data-i18n="how_to_donate">Comment faire ?</h3>
+          <ol class="steps">
+            <li data-i18n="step1">Touche « Ouvrir le menu Orange Money » ou compose #150# sur ton téléphone.</li>
+            <li data-i18n="step2">Choisis « Transfert d'argent ».</li>
+            <li data-i18n="step3">Entre le numéro 657 15 97 93.</li>
+            <li data-i18n="step4">Entre le montant de ton choix.</li>
+            <li data-i18n="step5">Vérifie le nom Vanelle Maheva puis confirme avec ton code secret.</li>
+          </ol>
+          <p class="note" data-i18n="donate_note">Ne communique jamais ton code secret à personne. TIOKOVA ne te le demandera jamais.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="section-title" data-i18n="other_support">Autres façons d'aider (gratuites)</h3>
+          <button class="btn btn-ghost full" id="btn-share-game"><span>📤</span> <span data-i18n="share_game">Partager le jeu à un ami</span></button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ ÉCRAN "INSTALLE LE JEU" ============
+       Affiché quand le jeu est ouvert dans le navigateur
+       au lieu de l'application installée. -->
+  <div class="gate hidden" id="gate">
+    <div class="gate-card">
+      <img class="gate-icon" src="icons/icon-192.png" alt="" width="96" height="96">
+      <h1 class="gate-title">TIOKOVA <span>BLOCKS</span></h1>
+      <p class="gate-sub" id="gate-sub"></p>
+      <ul class="gate-points" id="gate-points"></ul>
+      <div class="gate-action" id="gate-action"></div>
+      <p class="gate-foot" id="gate-foot"></p>
+    </div>
+  </div>
+
+  <!-- ============ MODALE GÉNÉRIQUE ============ -->
+  <div class="modal-backdrop hidden" id="modal">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-icon" id="modal-icon"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <!-- ============ TUTORIEL ============ -->
+  <div class="tuto hidden" id="tuto">
+    <div class="tuto-card">
+      <div class="tuto-anim" id="tuto-anim"></div>
+      <h2 id="tuto-title"></h2>
+      <p id="tuto-text"></p>
+      <div class="tuto-dots" id="tuto-dots"></div>
+      <div class="tuto-actions">
+        <button class="btn btn-ghost" id="tuto-skip" data-i18n="skip">Passer</button>
+        <button class="btn btn-primary" id="tuto-next" data-i18n="next">Suivant</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+  <div class="floating-layer" id="floating-layer"></div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

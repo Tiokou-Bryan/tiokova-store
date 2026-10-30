@@ -1,6 +1,6 @@
 // Service worker : garde une copie de l'appli pour qu'elle s'ouvre hors connexion.
-const CACHE = "tiokova-devises-v4";
-const FICHIERS = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
+const CACHE = "tiokova-devises-v5";
+const FICHIERS = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./installation.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FICHIERS)));
